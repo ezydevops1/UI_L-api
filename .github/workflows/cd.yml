@@ -2,24 +2,17 @@ name: CD
 
 on:
   push:
-    branches:
-      - dev
-      - qa
-      - prod
+    branches: [ main ]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-      - name: Extract branch name
-        run: echo "BRANCH=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
-
-      - name: Deploy to environment
-        run: echo "🚀 Deploying to environment: $BRANCH"
-
-    environment:
-      name: ${{ env.BRANCH }}
+      - name: Deploy (placeholder)
+        run: |
+          echo "Deploying the application..."
+          # Add your deploy commands here, e.g.:
+          # scp, rsync, docker build/push, kubectl apply, etc.

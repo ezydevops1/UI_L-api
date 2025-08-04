@@ -11,12 +11,15 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    environment:
-      name: ${{ github.ref_name }}
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Extract branch name
+        run: echo "BRANCH=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+
       - name: Deploy to environment
-        run: echo "🚀 Deploying to environment: ${{ github.ref_name }}"
+        run: echo "🚀 Deploying to environment: $BRANCH"
+
+    environment:
+      name: ${{ env.BRANCH }}

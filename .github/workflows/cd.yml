@@ -1,0 +1,24 @@
+name: CD
+
+on:
+  push:
+    branches:
+      - dev
+      - qa
+      - prod
+  pull_request:
+    branches: [ main, dev, qa, prod ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    environment:
+      name: ${{ github.ref_name }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Deploy to environment
+      run: echo "🚀 Deploying to environment: ${{ github.ref_name }}"
